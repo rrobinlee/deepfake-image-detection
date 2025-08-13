@@ -106,16 +106,16 @@ Performance Metrics
  
 |Image|True Class|CNN-predicted Class|ViT-predicted class|
 |-|-|-|-|
-||||
-
-
-
-
-
-
-
-
-
+|<img width="256" height="256" alt="image" src="https://github.com/user-attachments/assets/69319b42-8ba0-4549-9b00-5ad5eb83611f" />| Fake |Fake (confidence: 0.7283)|Fake (confidence: 0.9995)|
+|<img width="256" height="256" alt="image" src="https://github.com/user-attachments/assets/8f5f8fb5-0d57-4864-bd44-635073f76966" />| Fake |Fake (confidence: 0.7279)|Fake (confidence: 0.9945)|
+|<img width="256" height="256" alt="image" src="https://github.com/user-attachments/assets/676173e9-f465-444b-8599-4885bad58323" />| Fake |Fake (confidence: 0.7274)|Fake (confidence: 0.9985)|
+|<img width="256" height="256" alt="image" src="https://github.com/user-attachments/assets/16ee519a-7209-48cd-ab69-0e0d628cd306" />| Fake |Fake (confidence: 0.7239)|Fake (confidence: 0.9991)|
+|<img width="256" height="256" alt="image" src="https://github.com/user-attachments/assets/c644d363-c8ab-441f-a580-3664872340f4" />| Fake |Fake (confidence: 0.7263)|Fake (confidence: 0.9941)|
+|<img width="256" height="256" alt="image" src="https://github.com/user-attachments/assets/1038268d-bda9-4bc7-b007-0b152e71f3e5" />| Real |Real (confidence: 0.4046)|Real (confidence: 0.9882)|
+|<img width="256" height="256" alt="image" src="https://github.com/user-attachments/assets/70ce29a9-b6e8-43a8-b686-1ea5314948d8" />| Real |Real (confidence: 0.4858)|Real (confidence: 0.9535)|
+|<img width="256" height="256" alt="image" src="https://github.com/user-attachments/assets/a4aa34b4-2a03-4065-8606-c581b8730bed" />| Real |Real (confidence: 0.4916)|Real (confidence: 0.9966)|
+|<img width="260" height="321" alt="image" src="https://github.com/user-attachments/assets/1a6f6e61-e9a4-41e5-866b-3962457675d3" />| Real |Real (confidence: 0.4940)|Real (confidence: 1.0000)|
+|<img width="256" height="256" alt="image" src="https://github.com/user-attachments/assets/a699d651-4a6a-441c-9cab-1372a155719c" />| Real |Real (confidence: 0.4939)|Real (confidence: 0.9970)|
 
 
 
