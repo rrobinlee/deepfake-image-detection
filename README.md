@@ -52,11 +52,9 @@ BiSeNet is a real-time semantic segmentation architecture designed to balance sp
 
 ## Deep-Fake Classification Model Performance 
 
-### Model 1: Transfer-Learn DenseNet121 CNN using Feature Extraction
+### Model 1: Transfer-Learn DenseNet121 CNN using Feature Extraction/Fine-Tuning
 
-In order to transfer learn a CNN, we take a pre-trained backbone (DenseNet121), remove the last fully-connected layer, and treat the rest of the CNN as a fixed feature extractor. 
-* We freeze all the layers of the pre-trained model, remove its original classification head, add new classification layers, and then train **only** these new classification layers.
-* The pre-trained weights in the base model are never updated
+We use DenseNet121 pre-trained on ImageNet as a feature extractor by removing its original classification head. Initially, all backbone layers are frozen and only a new classification head is trained. For fine-tuning, we unfreeze the top 25% of backbone layers (keeping BatchNorm layers frozen) to adapt high-level features to the target dataset while preserving low-level representations.
 
 Performance Metrics:
   
@@ -66,13 +64,43 @@ Performance Metrics:
 > Test Recall: 0.9428<br/>
 > Test F1-Score: 0.96
 
+<details>
+<summary>Model Structure:</summary>
+
+<br>
+
+* Input: `Input(shape=(IMG_H, IMG_W, 3))`
+* Data Augmentation (training only)
+  * `RandomFlip("horizontal")` -> `RandomRotation(0.1)` -> `RandomZoom(0.1)` -> `RandomTranslation(0.1, 0.1)` -> `RandomContrast(0.1)`
+* Preprocessing
+  * `Rescaling(1/255.0)` -> normalize pixel values to [0,1]
+  * `Normalization(mean=[0.485,0.456,0.406], variance=[0.229^2,0.224^2,0.225^2])` -> ImageNet-style normalization
+* Backbone Model: **DenseNet121**
+  * Pre-trained on ImageNet, were `include_top=False`
+  * Stage 1: all layers frozen (fixed feature extractor)
+  * Output: feature maps of approx. size (H/32, W/32, 1024) 
+* Add new Classification Head
+  * Flatten feature maps: `GlobalAveragePooling2D()`
+  * Regularization: `BatchNormalization()` and `Dropout(0.5)` 
+  * Fully connected layer: `Dense(256, activation='relu', kernel_regularizer=l2(1e-4))`
+  * More regularization: `BatchNormalization()` and `Dropout(0.4)`
+  * Binary classification output: `Dense(1, activation='sigmoid')`
+* Training and fine-tuning
+  * Stage 1 (Warm-up): train only the new classification head, backbone frozen
+  * Stage 2 (Fine-tuning): unfreeze top 25% of backbone layers, keep BatchNorm layers frozen, lower learning rate for adaptation
+
+</details>
+
+Because of their local receptive fields, CNNs tend to require more fine-tuning and regularization in order to prevent overfitting.
+
 ### Model 2: Vision Transformer Classifier (Saved as `best_vit_model.h5`)
 
 The vision transformer applies the transformer architecture from NLP towards visual data. Rather than process text, the ViT will:
 
 1. Cut the image into fixed-size patches. Each patch is treated as a “token”, similar to a word in a sentence.
 2. Each token is processed using a Transformer encoder. Self-attention learns how each patch relates (or “talks”) to every other patch.
-3. Encoder outputs a classification token and feeds it into an MLP to make the final prediction.
+   * Global attention mechanism allows modeling long-range dependencies.
+4. Encoder outputs a classification token and feeds it into an MLP to make the final prediction.
 
 Performance Metrics:
 
@@ -145,6 +173,8 @@ with open("model_final_quantized.tflite", "wb") as f:
 ```
 
 </details>
+
+ViTs are computationally expensive compared to CNNs and require large datasets for optimal performance.
 
 ### Model Performance Comparison
 
