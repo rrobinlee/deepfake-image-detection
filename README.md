@@ -204,7 +204,7 @@ ViTs are computationally expensive compared to CNNs and require large datasets f
 
 #### Test Images
  
-|Image|True Class|CNN-predicted Class|ViT-predicted class|
+|Image|True Class|CNN Prediction|ViT Prediction|
 |-|-|-|-|
 |<img width="256" height="256" alt="image" src="https://github.com/user-attachments/assets/69319b42-8ba0-4549-9b00-5ad5eb83611f" />| Fake |Fake (confidence: 0.7283)|Fake (confidence: 0.9995)|
 |<img width="256" height="256" alt="image" src="https://github.com/user-attachments/assets/8f5f8fb5-0d57-4864-bd44-635073f76966" />| Fake |Fake (confidence: 0.7279)|Fake (confidence: 0.9945)|
