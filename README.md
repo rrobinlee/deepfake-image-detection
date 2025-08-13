@@ -58,22 +58,13 @@ In order to transfer learn a CNN, we take a pre-trained backbone (DenseNet121), 
 * We freeze all the layers of the pre-trained model, remove its original classification head, add new classification layers, and then train **only** these new classification layers.
 * The pre-trained weights in the base model are never updated
 
-#### Performance
-
-* Test Loss: 0.1996
-* Test Accuracy: 0.9620
-* Test Precision: 0.9803
-* Test Recall: 0.9428
-* Test F1-Score: 0.96
+Performance Metrics
   
-<Details>
-<summary><b>Performance Visualizations</b></summary>
-<img width="550" height="555" alt="image" src="https://github.com/user-attachments/assets/b6a95954-27b7-4ebd-9172-53ed40f33fa6" />
-
-|ROC Curve|Precision-Recall Curve|
-|-|-|
-|<img width="681" height="555" alt="image" src="https://github.com/user-attachments/assets/103e3f94-ea28-4abe-ba6d-983a8aa5d586" />|<img width="681" height="555" alt="image" src="https://github.com/user-attachments/assets/5d5410c1-ae3d-4a72-b464-85fe81ff963b" />|
-</Details>
+> Test Loss: 0.1996<br/>
+> Test Accuracy: **0.9620**<br/>
+> Test Precision: 0.9803<br/>
+> Test Recall: 0.9428<br/>
+> Test F1-Score: 0.96
 
 ### Model 2: Vision Transformer Classifier
 
@@ -83,28 +74,37 @@ The vision transformer applies the transformer architecture from NLP towards vis
 2. Each token is processed using a Transformer encoder. Self-attention learns how each patch relates (or “talks”) to every other patch.
 3. Encoder outputs a classification token and feeds it into an MLP to make the final prediction.
 
-#### Performance
+Performance Metrics
 
-* Test Loss: 0.2425
-* Test Accuracy: 0.9056
-* Test Precision:0.9204
-* Test Recall: 0.8879
-* Test F1-Score: 0.9039
-
-<Details>
-<summary><b>Performance Visualizations</b></summary>
-  
-<img width="550" height="555" alt="image" src="https://github.com/user-attachments/assets/7e165cf3-e22b-46ac-8fa4-1573e71eb63a" />
-
-|ROC Curve|Precision-Recall Curve|
-|-|-|
-|<img width="683" height="555" alt="image" src="https://github.com/user-attachments/assets/41b71151-f25b-4487-986f-60ca7d02cc65" />|<img width="683" height="555" alt="image" src="https://github.com/user-attachments/assets/8381cd52-ac6d-4620-aaab-495336f2dc47" />|
-
-</Details>
+> Test Loss: 0.2425<br/>
+> Test Accuracy: **0.9056**<br/>
+> Test Precision:0.9204<br/>
+> Test Recall: 0.8879<br/>
+> Test F1-Score: 0.9039
 
 ### Performance Comparison
 
-|Test Image|True Class|CNN-predicted Class|ViT-predicted class|
+#### Confusion Matrix
+
+|CNN|ViT|
+|-|-|
+|<img width="550" height="555" alt="image" src="https://github.com/user-attachments/assets/b6a95954-27b7-4ebd-9172-53ed40f33fa6" />|<img width="550" height="555" alt="image" src="https://github.com/user-attachments/assets/7e165cf3-e22b-46ac-8fa4-1573e71eb63a" />|
+
+#### ROC Curve
+
+|CNN|ViT|
+|-|-|
+|<img width="550" height="555" alt="image" src="https://github.com/user-attachments/assets/103e3f94-ea28-4abe-ba6d-983a8aa5d586" />|<img width="550" height="555" alt="image" src="https://github.com/user-attachments/assets/41b71151-f25b-4487-986f-60ca7d02cc65" />|
+
+#### Precision-Recall Curve
+
+|CNN|ViT|
+|-|-|
+|<img width="550" height="555" alt="image" src="https://github.com/user-attachments/assets/5d5410c1-ae3d-4a72-b464-85fe81ff963b" />|<img width="550" height="555" alt="image" src="https://github.com/user-attachments/assets/8381cd52-ac6d-4620-aaab-495336f2dc47" />|
+
+#### Test Images
+ 
+|Image|True Class|CNN-predicted Class|ViT-predicted class|
 |-|-|-|-|
 ||||
 
