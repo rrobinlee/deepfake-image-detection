@@ -58,7 +58,7 @@ In order to transfer learn a CNN, we take a pre-trained backbone (DenseNet121), 
 * We freeze all the layers of the pre-trained model, remove its original classification head, add new classification layers, and then train **only** these new classification layers.
 * The pre-trained weights in the base model are never updated
 
-Performance Metrics
+Performance Metrics:
   
 > Test Loss: 0.1996<br/>
 > Test Accuracy: **0.9620**<br/>
@@ -66,7 +66,7 @@ Performance Metrics
 > Test Recall: 0.9428<br/>
 > Test F1-Score: 0.96
 
-### Model 2: Vision Transformer Classifier
+### Model 2: Vision Transformer Classifier (Saved as `best_vit_model.h5`)
 
 The vision transformer applies the transformer architecture from NLP towards visual data. Rather than process text, the ViT will:
 
@@ -74,13 +74,77 @@ The vision transformer applies the transformer architecture from NLP towards vis
 2. Each token is processed using a Transformer encoder. Self-attention learns how each patch relates (or “talks”) to every other patch.
 3. Encoder outputs a classification token and feeds it into an MLP to make the final prediction.
 
-Performance Metrics
+Performance Metrics:
 
 > Test Loss: 0.2425<br/>
 > Test Accuracy: **0.9056**<br/>
 > Test Precision:0.9204<br/>
 > Test Recall: 0.8879<br/>
 > Test F1-Score: 0.9039
+
+<details>
+<summary>Model Structure:</summary>
+
+<img width="531" height="393" alt="image" src="https://github.com/user-attachments/assets/d97ac42e-a1a8-4d92-b1da-80f2384c8ec8" />
+
+<br>
+
+* Input: `(IMG_SIZE[0], IMG_SIZE[1], 3)` image
+* Stage 1: Data Augmentation (train-time only)
+  * Resize -> Rescale -> Random Flip -> Random Rotation -> Random Zoom
+* Stage 2: Patch Extraction
+  * `Patches` layer: Extracts non-overlapping 8×8 patches
+  * Result: `NUM_PATCHES = (IMG_SIZE[0] // 8)^2` patches, each flattened
+* Stage 3: Patch Encoding
+  * Dense projection to 64-dim embedding (`PROJECTION_DIM`)
+  * Learnable positional embedding of size (`NUM_PATCHES, 64`)
+* Stage 4: Transformer Encoder Block × 4 (`TRANSFORMER_LAYERS = 4`)
+  * For each block:
+    1. LayerNorm
+    2. Multi-Head Attention (6 heads, `key_dim = 64`, `dropout=0.1`)
+    3. Skip connection
+    4. LayerNorm
+    5. MLP with `[128, 64]` units (from `TRANSFORMER_UNITS`) + GELU activations + `dropout=0.1`
+    6. Skip connection
+* Stage 5: Representation & Classification Head
+  * LayerNorm
+  * Global Average Pooling (token-level to vector)
+  * `Dropout(0.2)`
+  * `Dense(1024, GELU)`
+  * `Dropout(0.2)`
+  * `Dense(512, GELU)`
+  * `Dropout(0.1)`
+  * Final `Dense(1)` output
+
+</details>
+
+<details>
+<summary>How to implement quantization:</summary>
+
+  ```
+from tensorflow import keras
+# define custom layer classes (needed for vit)
+custom_objects = {
+    "Patches":Patches,
+    "PatchEncoder": PatchEncoder
+}
+model = keras.models.load_model(
+    "best_vit_model.h5",
+    custom_objects=custom_objects
+)
+converter = tf.lite.TFLiteConverter.from_keras_model(model)
+converter.optimizations = [tf.lite.Optimize.DEFAULT]
+converter.target_spec.supported_ops = [
+    tf.lite.OpsSet.TFLITE_BUILTINS, 
+    tf.lite.OpsSet.SELECT_TF_OPS  
+]
+converter.target_spec.supported_types = [tf.float16]
+quant_model = converter.convert()
+with open("model_final_quantized.tflite", "wb") as f:
+    f.write(quant_model)
+```
+
+</details>
 
 ### Model Performance Comparison
 
