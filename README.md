@@ -93,7 +93,7 @@ Performance Metrics:
 
 Because of their local receptive fields, CNNs tend to require more fine-tuning and regularization in order to prevent overfitting.
 
-### Model 2: Vision Transformer Classifier (Saved as `best_vit_model.h5`)
+### Model 2: Vision Transformer Classifier (Untuned parameters)
 
 The vision transformer applies the transformer architecture from NLP towards visual data. Rather than process text, the ViT will:
 
@@ -149,6 +149,12 @@ Performance Metrics:
 <details>
 <summary>How to implement quantization:</summary>
 
+<br>
+
+Full model currently saved as `best_vit_model.h5`
+
+<br>
+
   ```
 from tensorflow import keras
 # define custom layer classes (needed for vit)
@@ -174,7 +180,7 @@ with open("model_final_quantized.tflite", "wb") as f:
 
 </details>
 
-ViTs are computationally expensive compared to CNNs and require large datasets for optimal performance.
+ViTs are computationally expensive compared to CNNs and require large datasets for optimal performance. Due to limited compute units, this model is **not fine-tuned**. 
 
 ### Model Performance Comparison
 
