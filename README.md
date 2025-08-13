@@ -82,7 +82,7 @@ Performance Metrics
 > Test Recall: 0.8879<br/>
 > Test F1-Score: 0.9039
 
-### Performance Comparison
+### Model Performance Comparison
 
 #### Confusion Matrix
 
