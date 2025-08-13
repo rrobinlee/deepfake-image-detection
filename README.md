@@ -22,6 +22,14 @@ For training convenience:
 ## Face Segmentation 
 
 ### Model 1: MediaPipe Face Landmarker
+
+The MediaPipe Face Landmarker detects face landmarks and facial expressions in images and videos to identify human facial expressions, apply facial filters and effects, and create virtual avatars
+
+Model Overview:
+* Detection: Feeds the prepared image to the detector method. This runs the pre-trained model, containing the coordinates of 478 landmarks
+* Landmark Extraction: Extracts the indices for the specific landmarks that form the left eye, right eye, nose, and lips. It then uses list comprehensions to pull the actual coordinate data for those features.
+* Drawing: Takes a list of landmark coordinates and draws a small circle at each point on the image. This visualizes the model's output directly on the face.
+
 |Test1|Test2|Test3|Test4|Test5|
 |-|-|-|-|-|
 |<img width="636" height="658" alt="image" src="https://github.com/user-attachments/assets/e363d4ce-3425-4123-8506-d1370b03bc54" />|<img width="636" height="658" alt="image" src="https://github.com/user-attachments/assets/97665b39-4058-4ff7-8760-e828a96c7826" />|<img width="636" height="658" alt="image" src="https://github.com/user-attachments/assets/3a6a697a-e495-4387-b9e0-871a38da8e78" />|<img width="636" height="658" alt="image" src="https://github.com/user-attachments/assets/e678e452-f5c2-4be6-aa99-1c13a26b92a9" />|<img width="636" height="658" alt="image" src="https://github.com/user-attachments/assets/69edeff4-fbaa-45b1-8a05-568f17440d29" />|
@@ -31,6 +39,8 @@ For training convenience:
 |<img width="636" height="658" alt="image" src="https://github.com/user-attachments/assets/60a300f4-2d19-4f47-9b1e-05d4d7bd24c6" />|<img width="636" height="658" alt="image" src="https://github.com/user-attachments/assets/c89115a8-b3af-4699-9f1a-95d53e5fd15f" />|<img width="636" height="658" alt="image" src="https://github.com/user-attachments/assets/26683d2b-6d5e-4760-8fbf-654db770a747" />|<img width="636" height="658" alt="image" src="https://github.com/user-attachments/assets/74cbf079-076d-40b1-9c35-084234e4343a" />|<img width="636" height="658" alt="image" src="https://github.com/user-attachments/assets/3782fabe-6b85-467d-a675-900b2c2bab6c" />|
 
 ### Model 2: Bilateral Segmentation Network (BiSeNet)
+
+BiSeNet is a real-time semantic segmentation architecture designed to balance spatial detail and receptive field for efficient and accurate image segmentation.
 
 |Test1|Test2|Test3|Test4|Test5|
 |-|-|-|-|-|
@@ -50,6 +60,12 @@ For training convenience:
 |<img width="645" height="555" alt="image" src="https://github.com/user-attachments/assets/b6a95954-27b7-4ebd-9172-53ed40f33fa6" />|<img width="681" height="555" alt="image" src="https://github.com/user-attachments/assets/103e3f94-ea28-4abe-ba6d-983a8aa5d586" />|<img width="681" height="555" alt="image" src="https://github.com/user-attachments/assets/5d5410c1-ae3d-4a72-b464-85fe81ff963b" />|
 
 ### Test Model: Vision Transformer Classifier
+
+The vision transformer applies the transformer architecture from NLP towards visual data. Rather than process text, the ViT will:
+
+1. Cut the image into fixed-size patches. Each patch is treated as a “token”, similar to a word in a sentence.
+2. Each token is processed using a Transformer encoder. Self-attention learns how each patch relates (or “talks”) to every other patch.
+3. Encoder outputs a classification token and feeds it into an MLP to make the final prediction.
 
 |Confusion Matrix|ROC Curve|Precision-Recall Curve|
 |-|-|-|
