@@ -58,11 +58,13 @@ We use DenseNet121 pre-trained on ImageNet as a feature extractor by removing it
 
 Performance Metrics:
   
-> Test Loss: 0.1996<br/>
-> Test Accuracy: **0.9620**<br/>
-> Test Precision: 0.9803<br/>
-> Test Recall: 0.9428<br/>
-> Test F1-Score: 0.96
+> Test Loss: 0.1948<br/>
+> Test Accuracy: **0.9643**<br/>
+> Test Precision: 0.9661<br/>
+> Test Recall: 0.9624<br/>
+> Test F1-Score: 0.9642<br/>
+> Test AUPRC: 0.9941<br/>
+> Test AUROC: 0.9944
 
 <details>
 <summary>Model Structure:</summary>
@@ -188,34 +190,34 @@ ViTs are computationally expensive compared to CNNs and require large datasets f
 
 |CNN|ViT|
 |-|-|
-|<img width="550" height="555" alt="image" src="https://github.com/user-attachments/assets/b6a95954-27b7-4ebd-9172-53ed40f33fa6" />|<img width="550" height="555" alt="image" src="https://github.com/user-attachments/assets/7e165cf3-e22b-46ac-8fa4-1573e71eb63a" />|
+|<img width="550" height="701" alt="image" src="https://github.com/user-attachments/assets/e2b7e879-50d1-4810-8314-9a9ba251ad49" />|<img width="550" height="555" alt="image" src="https://github.com/user-attachments/assets/7e165cf3-e22b-46ac-8fa4-1573e71eb63a" />|
 
 #### ROC Curve
 
 |CNN|ViT|
 |-|-|
-|<img width="550" height="555" alt="image" src="https://github.com/user-attachments/assets/103e3f94-ea28-4abe-ba6d-983a8aa5d586" />|<img width="550" height="555" alt="image" src="https://github.com/user-attachments/assets/41b71151-f25b-4487-986f-60ca7d02cc65" />|
+|<img width="550" height="701" alt="image" src="https://github.com/user-attachments/assets/cb02e132-9297-42ef-bf6f-2beac3e7ca40" />|<img width="550" height="555" alt="image" src="https://github.com/user-attachments/assets/41b71151-f25b-4487-986f-60ca7d02cc65" />|
 
 #### Precision-Recall Curve
 
 |CNN|ViT|
 |-|-|
-|<img width="550" height="555" alt="image" src="https://github.com/user-attachments/assets/5d5410c1-ae3d-4a72-b464-85fe81ff963b" />|<img width="550" height="555" alt="image" src="https://github.com/user-attachments/assets/8381cd52-ac6d-4620-aaab-495336f2dc47" />|
+|<img width="550" height="701" alt="image" src="https://github.com/user-attachments/assets/c032bf03-49aa-4570-af2a-b757a232026d" />|<img width="550" height="555" alt="image" src="https://github.com/user-attachments/assets/8381cd52-ac6d-4620-aaab-495336f2dc47" />|
 
 #### Test Images
  
 |Image|True Class|CNN Prediction|ViT Prediction|
 |-|-|-|-|
-|<img width="256" height="256" alt="image" src="https://github.com/user-attachments/assets/69319b42-8ba0-4549-9b00-5ad5eb83611f" />| Fake |Fake (confidence: 0.7283)|Fake (confidence: 0.9995)|
-|<img width="256" height="256" alt="image" src="https://github.com/user-attachments/assets/8f5f8fb5-0d57-4864-bd44-635073f76966" />| Fake |Fake (confidence: 0.7279)|Fake (confidence: 0.9945)|
-|<img width="256" height="256" alt="image" src="https://github.com/user-attachments/assets/676173e9-f465-444b-8599-4885bad58323" />| Fake |Fake (confidence: 0.7274)|Fake (confidence: 0.9985)|
-|<img width="256" height="256" alt="image" src="https://github.com/user-attachments/assets/16ee519a-7209-48cd-ab69-0e0d628cd306" />| Fake |Fake (confidence: 0.7239)|Fake (confidence: 0.9991)|
-|<img width="256" height="256" alt="image" src="https://github.com/user-attachments/assets/c644d363-c8ab-441f-a580-3664872340f4" />| Fake |Fake (confidence: 0.7263)|Fake (confidence: 0.9941)|
-|<img width="256" height="256" alt="image" src="https://github.com/user-attachments/assets/1038268d-bda9-4bc7-b007-0b152e71f3e5" />| Real |Real (confidence: 0.4046)|Real (confidence: 0.9882)|
-|<img width="256" height="256" alt="image" src="https://github.com/user-attachments/assets/70ce29a9-b6e8-43a8-b686-1ea5314948d8" />| Real |Real (confidence: 0.4858)|Real (confidence: 0.9535)|
-|<img width="256" height="256" alt="image" src="https://github.com/user-attachments/assets/a4aa34b4-2a03-4065-8606-c581b8730bed" />| Real |Real (confidence: 0.4916)|Real (confidence: 0.9966)|
-|<img width="260" height="321" alt="image" src="https://github.com/user-attachments/assets/1a6f6e61-e9a4-41e5-866b-3962457675d3" />| Real |Real (confidence: 0.4940)|Real (confidence: 1.0000)|
-|<img width="256" height="256" alt="image" src="https://github.com/user-attachments/assets/a699d651-4a6a-441c-9cab-1372a155719c" />| Real |Real (confidence: 0.4939)|Real (confidence: 0.9970)|
+|<img width="256" height="256" alt="image" src="https://github.com/user-attachments/assets/69319b42-8ba0-4549-9b00-5ad5eb83611f" />| Fake |Fake (confidence: 0.9861)|Fake (confidence: 0.9995)|
+|<img width="256" height="256" alt="image" src="https://github.com/user-attachments/assets/8f5f8fb5-0d57-4864-bd44-635073f76966" />| Fake |Fake (confidence: 0.9838)|Fake (confidence: 0.9945)|
+|<img width="256" height="256" alt="image" src="https://github.com/user-attachments/assets/676173e9-f465-444b-8599-4885bad58323" />| Fake |Fake (confidence: 0.9815)|Fake (confidence: 0.9985)|
+|<img width="256" height="256" alt="image" src="https://github.com/user-attachments/assets/16ee519a-7209-48cd-ab69-0e0d628cd306" />| Fake |Fake (confidence: 0.9638)|Fake (confidence: 0.9991)|
+|<img width="256" height="256" alt="image" src="https://github.com/user-attachments/assets/c644d363-c8ab-441f-a580-3664872340f4" />| Fake |Fake (confidence: 0.9760)|Fake (confidence: 0.9941)|
+|<img width="256" height="256" alt="image" src="https://github.com/user-attachments/assets/1038268d-bda9-4bc7-b007-0b152e71f3e5" />| Real |Real (confidence: 0.6140)|Real (confidence: 0.9882)|
+|<img width="256" height="256" alt="image" src="https://github.com/user-attachments/assets/70ce29a9-b6e8-43a8-b686-1ea5314948d8" />| Real |Real (confidence: 0.9431)|Real (confidence: 0.9535)|
+|<img width="256" height="256" alt="image" src="https://github.com/user-attachments/assets/a4aa34b4-2a03-4065-8606-c581b8730bed" />| Real |Real (confidence: 0.9663)|Real (confidence: 0.9966)|
+|<img width="260" height="321" alt="image" src="https://github.com/user-attachments/assets/1a6f6e61-e9a4-41e5-866b-3962457675d3" />| Real |Real (confidence: 0.9762)|Real (confidence: 1.0000)|
+|<img width="256" height="256" alt="image" src="https://github.com/user-attachments/assets/a699d651-4a6a-441c-9cab-1372a155719c" />| Real |Real (confidence: 0.9755)|Real (confidence: 0.9970)|
 
 
 
